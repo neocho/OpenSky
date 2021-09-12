@@ -2,17 +2,15 @@ import { useState, useEffect, useMemo, useCallback } from 'react'
 import { ethers } from 'ethers'
 import Onboard from 'bnc-onboard'
 import { createContainer } from 'unstated-next'
-import { Web3Provider } from '@ethersproject/providers'
 
 const walletChoices = [
     { 
         walletName: 'metamask', 
-        preferred: true 
     },
     { 
         walletName: 'walletConnect', 
-        infuraKey: {
-            ['1']: process.env.INFURA_KEY
+        rpc: {
+            ['1']: `${process.env.WALLET_CONNECT_RPC_ENDPOINT}`
         }
     }
 ];
@@ -32,6 +30,7 @@ export const useWallet = () => {
             dappId: process.env.BLOCKNATIVE_KEY, 
             networkId: 1, 
             hideBranding: true, 
+            blockPollingInterval: 5000,
             walletSelect: {
                 heading: "Connect to OpenSky 🌞☁️", 
                 description: "Select a wallet", 
