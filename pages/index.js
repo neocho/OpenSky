@@ -1,8 +1,7 @@
 import Head from 'next/head'
 import { useState } from 'react';
-import { ConnectWallet } from '../components/connect'
 import Modal from 'react-modal'
-import { mintNft } from '../helpers/mint_nft';
+import { ConnectWallet } from '../components/connect';
 
 export default function Home() {
   const [ modalIsOpen, setIsOpen ] = useState(false);
@@ -31,7 +30,6 @@ export default function Home() {
   }
 
   const handleClick = async () => {
-    await mintNft();
   };
 
   return (

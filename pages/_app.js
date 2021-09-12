@@ -1,16 +1,11 @@
 import 'tailwindcss/tailwind.css'
-import { Web3ReactProvider } from '@web3-react/core';
-import { Web3Provider } from '@ethersproject/providers';
-
-function getLibrary(provider) {
-  return new Web3Provider(provider);
-}
+import Wallet from '../hooks/useWallet'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Web3ReactProvider getLibrary={getLibrary}>
+    <Wallet.Provider>
       <Component {...pageProps} />
-    </Web3ReactProvider>
+    </Wallet.Provider>
   );
 }
 
