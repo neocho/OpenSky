@@ -25,8 +25,6 @@ export default function Explore() {
                 arr.push(value);
             }
 
-            console.log(arr)
-
             setCollection(arr);
         }
     }, [nfts]);
@@ -41,9 +39,9 @@ export default function Explore() {
         <ConnectWallet />
 
         <Link href="/">
-            <div className="flex flex-col absolute top-0 right-0 mt-8 mr-52">
+            <div className="flex flex-col absolute top-0 right-0 mt-7 mr-52">
                 <button>
-                    <img src="home.svg" alt=""></img>
+                    <img src="home.svg" width="35px" alt=""></img>
                 </button>
             </div>
         </Link>

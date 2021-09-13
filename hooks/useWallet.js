@@ -82,10 +82,16 @@ export const useWallet = () => {
     const login = useCallback(async() => {
         await onboard.walletSelect(); 
 
+        let res = null; 
+
         try{
-            await onboard.walletCheck(); 
+            res = await onboard.walletCheck(); 
         }catch(error){  
-            showToast(error);
+            console.log(error);
+        }
+
+        if(!res){
+            showToast("Error connecting to wallet.")
         }
     }, [onboard]);
 

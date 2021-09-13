@@ -5,7 +5,6 @@ import { cutAddress } from '../helpers/cutAddress';
 export const ConnectWallet = () => {
     const { address, ensName, login, provider } = Wallet.useContainer(); 
     const [ buttonContent, setButtonContent ] = useState("Connect to wallet"); 
-    const [ info, setInfo ] = useState("");
 
     useEffect(() => {
         if(ensName !== null){
@@ -15,7 +14,7 @@ export const ConnectWallet = () => {
         }else{
             setButtonContent("Connect to wallet");
         }
-    }, [address, ensName]);
+    }, [provider, ensName, address]);
 
     return(
         <div className="flex flex-col absolute top-0 right-0 mt-6 mr-6">

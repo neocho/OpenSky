@@ -78,9 +78,9 @@ export default function Home() {
           <img src="content2.svg" alt="" />
         </div>
 
-        <div className="flex justify-around max-w-sm mt-8 sm:w-full">
+        <div className="flex justify-around max-w-sm mt-8 sm:w-full space-x-2">
           <Link href="/explore">
-            <button className="h-14 text-white font-medium pl-6 pr-6 rounded-lg bg-gray-900 hover:opacity-90">
+            <button className="h-14 text-white font-medium pl-4 pr-4 rounded-lg bg-gray-900 hover:opacity-90">
               Explore your NFTs
             </button> 
           </Link>
