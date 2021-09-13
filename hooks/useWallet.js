@@ -1,7 +1,9 @@
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback } from 'react'
+import * as zksync from 'zksync';
 import { ethers } from 'ethers'
 import Onboard from 'bnc-onboard'
 import { createContainer } from 'unstated-next'
+import { showToast } from '../helpers/showToast';
 
 const walletChoices = [
     { 
@@ -24,6 +26,8 @@ export const useWallet = () => {
     const [ address, setAddress ] = useState(null);
     const [ provider, setProvider ] = useState(null); 
     const [ ensName, setEnsName ] = useState(undefined);
+    const [ syncWallet, setSyncWallet ] = useState(null);
+    const [ syncProvider, setSyncProvider ] = useState(null);
 
     const onboard = useMemo(() => {
         return Onboard({
@@ -40,8 +44,17 @@ export const useWallet = () => {
                 wallet: async (wallet) => {
                     if(wallet.provider) {
                         const provider = new ethers.providers.Web3Provider(wallet.provider);
+
+                        const syncProvider = await zksync.getDefaultProvider('mainnet');
+                        const ethWalletSigner = new ethers.providers.Web3Provider(provider.provider).getSigner();
+                        const syncWallet = await zksync.Wallet.fromEthSigner(ethWalletSigner, syncProvider);
+            
+                        setSyncProvider(syncProvider);
+                        setSyncWallet(syncWallet);
                         setProvider(provider);
                     }else{
+                        setSyncProvider(null);
+                        setSyncWallet(null);
                         setAddress(null);
                         setProvider(null);
                     }
@@ -69,17 +82,17 @@ export const useWallet = () => {
     const login = useCallback(async() => {
         await onboard.walletSelect(); 
 
-        let connectionResult = null;
-
         try{
-            connectionResult = await onboard.walletCheck(); 
+            await onboard.walletCheck(); 
         }catch(error){  
-            console.log(error);
+            showToast(error);
         }
     }, [onboard]);
 
     return {
         provider, 
+        syncProvider,
+        syncWallet, 
         address, 
         ensName, 
         login
