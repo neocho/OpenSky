@@ -187,9 +187,9 @@ export default function Home() {
         <ShowToast />
       </main>
 
-      <button onClick={transferNFT}>Transfer</button>
+      {/* <button onClick={transferNFT}>Transfer</button>
       <button onClick={sellNFT}>Sell</button>
-      <button onClick={buyNFT}>Buy</button>
+      <button onClick={buyNFT}>Buy</button> */}
 
 
       <footer className="flex items-center justify-center w-full h-24 border-t">
