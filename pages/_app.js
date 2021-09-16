@@ -1,6 +1,6 @@
-import 'tailwindcss/tailwind.css'
-import Wallet from '../hooks/useWallet'
-import SyncWallet from '../hooks/useZksync';
+import "tailwindcss/tailwind.css";
+import Wallet from "../hooks/useWallet";
+import SyncWallet from "../hooks/useZksync";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -12,4 +12,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp
+export default MyApp;

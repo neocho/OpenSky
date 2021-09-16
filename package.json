@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "prettier --write .; next lint"
   },
   "dependencies": {
     "axios": "^0.21.4",
@@ -22,7 +23,10 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "11.1.2",
     "postcss": "^8.3.5",
+    "prettier": "^2.4.1",
     "tailwindcss": "^2.2.4"
   }
 }
