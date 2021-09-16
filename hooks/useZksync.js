@@ -90,7 +90,7 @@ export const useZksync = () => {
           console.log('2')
 
           const transfer = await syncWallet.syncTransferNFT({
-            to: "0x39f4f8a6012b62379bc4e82948a2a5F8D48c7E8d",
+            to: "",
             token: nft,
             feeToken: "ETH",
             totalFee,
@@ -121,7 +121,7 @@ export const useZksync = () => {
           ETH: 0.000001,
           [nft.id]: 1 
         }), 
-        recipient: '0xbE694be8e812ae1a99443b32041142C36597A772'
+        recipient: ''
       });
     }catch(error){
       showToast(error.message)
