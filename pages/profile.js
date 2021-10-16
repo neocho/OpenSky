@@ -140,7 +140,7 @@ export default function Explore() {
                       curr.image !== undefined
                   )
                   .map((curr, idx) => (
-                    <PreviewCard info={curr} val={idx} />
+                    <PreviewCard info={curr} val={idx} key={idx} />
                   ))}
               </div>
             )}
