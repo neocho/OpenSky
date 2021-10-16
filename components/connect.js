@@ -7,9 +7,7 @@ export const ConnectWallet = () => {
   const [buttonContent, setButtonContent] = useState("Connect to wallet");
 
   useEffect(() => {
-    if (ensName !== null) {
-      setButtonContent(ensName);
-    } else if (address !== null) {
+    if (address !== null) {
       setButtonContent(cutAddress(address));
     } else {
       setButtonContent("Connect to wallet");
@@ -17,15 +15,13 @@ export const ConnectWallet = () => {
   }, [provider, ensName, address]);
 
   return (
-    <div className="flex flex-col absolute top-0 right-0 mt-6 mr-6">
-      <div>
-        <button
-          className="h-10 text-white font-medium pl-4 pr-4 w-40 rounded-lg bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 hover:opacity-90"
-          onClick={() => login()}
-        >
-          {buttonContent}
-        </button>
-      </div>
+    <div>
+      <button
+        className="h-9 w-48 px-5 justify-center items-center font-sans text-base font-semibold rounded-lg border border-gray-200 bg-gray-100 hover:border-gray-300"
+        onClick={() => login()}
+      >
+        {buttonContent}
+      </button>
     </div>
   );
 };

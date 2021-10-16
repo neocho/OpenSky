@@ -1,9 +1,10 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import * as zksync from "zksync";
 import { ethers } from "ethers";
 import Onboard from "bnc-onboard";
 import { createContainer } from "unstated-next";
 import { showToast } from "../helpers/showToast";
+import axios from "axios";
 
 const walletChoices = [
   {
@@ -22,7 +23,6 @@ const walletChecks = [{ checkName: "accounts" }, { checkName: "connect" }];
 export const useWallet = () => {
   const [address, setAddress] = useState(null);
   const [provider, setProvider] = useState(null);
-  const [ensName, setEnsName] = useState(undefined);
   const [syncWallet, setSyncWallet] = useState(null);
   const [syncProvider, setSyncProvider] = useState(null);
 
@@ -33,7 +33,7 @@ export const useWallet = () => {
       hideBranding: true,
       blockPollingInterval: 5000,
       walletSelect: {
-        heading: "Connect to OpenSky 🌞☁️",
+        heading: "Connect to OpenSky 🌞",
         description: "Select a wallet",
         wallets: walletChoices,
       },
@@ -42,7 +42,10 @@ export const useWallet = () => {
           if (wallet.provider) {
             const provider = new ethers.providers.Web3Provider(wallet.provider);
 
+            setProvider(provider);
+
             const syncProvider = await zksync.getDefaultProvider("mainnet");
+
             const ethWalletSigner = new ethers.providers.Web3Provider(
               provider.provider
             ).getSigner();
@@ -53,7 +56,6 @@ export const useWallet = () => {
 
             setSyncProvider(syncProvider);
             setSyncWallet(syncWallet);
-            setProvider(provider);
           } else {
             setSyncProvider(null);
             setSyncWallet(null);
@@ -69,13 +71,6 @@ export const useWallet = () => {
             setProvider(null);
           }
         },
-        ens: async (ens) => {
-          if (ens !== undefined) {
-            setEnsName(ens.name);
-          } else {
-            setEnsName(null);
-          }
-        },
       },
       walletCheck: walletChecks,
     });
@@ -84,16 +79,10 @@ export const useWallet = () => {
   const login = useCallback(async () => {
     await onboard.walletSelect();
 
-    let res = null;
-
     try {
-      res = await onboard.walletCheck();
+      await onboard.walletCheck();
     } catch (error) {
-      console.log(error);
-    }
-
-    if (!res) {
-      showToast("Error connecting to wallet.");
+      showToast(error.message);
     }
   }, [onboard]);
 
@@ -102,7 +91,6 @@ export const useWallet = () => {
     syncProvider,
     syncWallet,
     address,
-    ensName,
     login,
   };
 };
