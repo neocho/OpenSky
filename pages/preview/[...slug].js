@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Head from "next/head";
 import { ShowToast } from "../../components/toast";
 
 export default function Preview() {
@@ -10,9 +10,8 @@ export default function Preview() {
       </Head>
 
       <main className="w-full flex-1 items-center justify-center flex">
-          <h1 className="text-xl font-sans font-semibold">
-          </h1>
-          <ShowToast />
+        <h1 className="text-xl font-sans font-semibold"></h1>
+        <ShowToast />
       </main>
     </div>
   );

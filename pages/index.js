@@ -11,8 +11,8 @@ export default function Home() {
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
         <div className="flex justify-around text-2xl font-sans font-semibold">
           <h1>
-            OpenSky lets you mint and transfer NFTs for a fraction of the cost on
-            Ethereum.
+            OpenSky lets you mint and transfer NFTs for a fraction of the cost
+            on Ethereum.
           </h1>
         </div>
         <div className="flex justify-around text-2xl font-sans font-semibold ">
